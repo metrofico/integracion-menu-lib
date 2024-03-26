@@ -19,7 +19,7 @@ func (t TransformMenuUseCaseImpl) Execute(input *models.InputMenu) []entities.Me
 	}
 
 	var menus []entities.Menu
-
+	mapCategory, mapItem := input.MakeMap()
 	for _, inputMenu := range input.Menus {
 		menu := entities.NewMenu()
 		menu.Id = inputMenu.ID
@@ -28,20 +28,20 @@ func (t TransformMenuUseCaseImpl) Execute(input *models.InputMenu) []entities.Me
 
 		var categories []entities.Category
 		for _, inputCategory := range input.Categories {
-			hasCategory := inputMenu.ContainsCategory(inputCategory.ID)
-			if hasCategory {
+			_, ok := mapCategory[inputCategory.ID]
+			if ok {
 				category := entities.NewCategory(
 					inputCategory.ID,
 					inputCategory.Title,
 					inputCategory.Subtitle,
 				)
-
-				for _, inputItem := range filterItemsByCategory(input.Items, inputCategory.Entities) {
-					item := entities.NewItem()
-					item.Mapper(inputItem)
-					category.Items = append(category.Items, item)
+				for _, inputItem := range inputCategory.Entities {
+					if entityItem, ok2 := mapItem[inputItem.ID]; ok2 {
+						item := entities.NewItem()
+						item.Mapper(entityItem)
+						category.Items = append(category.Items, item)
+					}
 				}
-
 				categories = append(categories, category)
 			}
 		}

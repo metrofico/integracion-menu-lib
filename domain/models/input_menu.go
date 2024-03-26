@@ -80,3 +80,15 @@ func (menu *Menu) ContainsCategory(categoryId string) bool {
 	}
 	return false
 }
+
+func (inputMenu *InputMenu) MakeMap() (map[string]Category, map[string]Item) {
+	categoryMap := make(map[string]Category)
+	entityMap := make(map[string]Item)
+	for _, category := range inputMenu.Categories {
+		categoryMap[category.ID] = category
+	}
+	for _, entity := range inputMenu.Items {
+		entityMap[entity.ID] = entity
+	}
+	return categoryMap, entityMap
+}
