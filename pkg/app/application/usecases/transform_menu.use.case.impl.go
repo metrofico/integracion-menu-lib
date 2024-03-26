@@ -36,6 +36,10 @@ func (t TransformMenuUseCaseImpl) Execute(input *models.InputMenu) []entities.Me
 					inputCategory.Subtitle,
 				)
 				for _, inputItem := range inputCategory.Entities {
+					if inputItem.Type != "ITEM" {
+						continue
+					}
+
 					if entityItem, ok2 := mapItem[inputItem.ID]; ok2 {
 						item := entities.NewItem()
 						item.Mapper(entityItem)
