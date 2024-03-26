@@ -2,9 +2,9 @@ package services
 
 import (
 	"encoding/json"
-	"shared-library/domain/entities"
-	"shared-library/domain/models"
-	"shared-library/domain/ports/in/usecases"
+	"shared-library/pkg/app/domain/entities"
+	"shared-library/pkg/app/domain/models"
+	"shared-library/pkg/app/domain/ports/in/usecases"
 )
 
 type MenuServiceImpl struct {

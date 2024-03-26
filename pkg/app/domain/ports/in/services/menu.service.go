@@ -1,7 +1,7 @@
 package services
 
 import (
-	"shared-library/domain/entities"
+	"shared-library/pkg/app/domain/entities"
 )
 
 type MenuService interface {

@@ -1,8 +1,8 @@
 package usecases
 
 import (
-	"shared-library/domain/entities"
-	"shared-library/domain/models"
+	"shared-library/pkg/app/domain/entities"
+	"shared-library/pkg/app/domain/models"
 )
 
 type TransformMenuUseCase interface {

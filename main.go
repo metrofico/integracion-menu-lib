@@ -3,9 +3,9 @@ package main
 import (
 	"encoding/json"
 	"log"
-	"shared-library/application/services"
-	"shared-library/application/usecases"
-	services2 "shared-library/domain/ports/in/services"
+	"shared-library/pkg/app/application/services"
+	"shared-library/pkg/app/application/usecases"
+	services2 "shared-library/pkg/app/domain/ports/in/services"
 )
 
 func main() {

@@ -1,6 +1,6 @@
 package entities
 
-import "shared-library/domain/models"
+import "shared-library/pkg/app/domain/models"
 
 type Item struct {
 	Id           string `json:"id" bson:"id"`
