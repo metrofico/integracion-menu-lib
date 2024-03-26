@@ -3,7 +3,7 @@ package usecases
 import (
 	"shared-library/domain/entities"
 	"shared-library/domain/models"
-	"shared-library/domain/ports.in/usecases"
+	"shared-library/domain/ports/in/usecases"
 )
 
 type TransformMenuUseCaseImpl struct {
@@ -57,7 +57,7 @@ func filterItemsByCategory(items []models.Item, categoryEntities []models.Entity
 	var filtered []models.Item
 	for _, entity := range categoryEntities {
 		for _, menu := range items {
-			if menu.ID == entity.ID {
+			if menu.ID == entity.ID && entity.Type == "ITEM" {
 				filtered = append(filtered, menu)
 			}
 		}
