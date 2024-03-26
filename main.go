@@ -5,7 +5,7 @@ import (
 	"log"
 	"shared-library/application/services"
 	"shared-library/application/usecases"
-	services2 "shared-library/domain/ports.in/services"
+	services2 "shared-library/domain/ports/in/services"
 )
 
 func main() {
