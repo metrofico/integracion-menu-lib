@@ -1,9 +1,9 @@
 package usecases
 
 import (
-	"shared-library/pkg/app/domain/entities"
-	"shared-library/pkg/app/domain/models"
-	"shared-library/pkg/app/domain/ports/in/usecases"
+	"github.com/metrofico/integracion-menu-lib/pkg/app/domain/entities"
+	"github.com/metrofico/integracion-menu-lib/pkg/app/domain/models"
+	"github.com/metrofico/integracion-menu-lib/pkg/app/domain/ports/in/usecases"
 )
 
 type TransformMenuUseCaseImpl struct {

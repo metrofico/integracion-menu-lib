@@ -2,8 +2,8 @@ package usecases
 
 import (
 	"fmt"
-	"shared-library/pkg/app/application/usecases"
-	"shared-library/pkg/app/domain/models"
+	"github.com/metrofico/integracion-menu-lib/pkg/app/application/usecases"
+	"github.com/metrofico/integracion-menu-lib/pkg/app/domain/models"
 	"testing"
 )
 
