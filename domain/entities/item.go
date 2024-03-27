@@ -1,6 +1,6 @@
 package entities
 
-import "shared-library/domain/models"
+import "github.com/metrofico/integracion-menu-lib/domain/models"
 
 type Item struct {
 	Id           string `json:"id" bson:"id"`

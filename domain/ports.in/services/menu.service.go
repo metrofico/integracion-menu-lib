@@ -1,7 +1,7 @@
 package services
 
 import (
-	"shared-library/domain/entities"
+	"github.com/metrofico/integracion-menu-lib/domain/entities"
 )
 
 type MenuService interface {

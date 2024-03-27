@@ -1,8 +1,8 @@
 package usecases
 
 import (
-	"shared-library/domain/entities"
-	"shared-library/domain/models"
+	"github.com/metrofico/integracion-menu-lib/domain/entities"
+	"github.com/metrofico/integracion-menu-lib/domain/models"
 )
 
 type TransformMenuUseCase interface {

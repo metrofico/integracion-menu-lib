@@ -1,11 +1,11 @@
-package main
+package integracion
 
 import (
 	"encoding/json"
+	"github.com/metrofico/integracion-menu-lib/application/services"
+	"github.com/metrofico/integracion-menu-lib/application/usecases"
+	services2 "github.com/metrofico/integracion-menu-lib/domain/ports.in/services"
 	"log"
-	"shared-library/application/services"
-	"shared-library/application/usecases"
-	services2 "shared-library/domain/ports.in/services"
 )
 
 func main() {
