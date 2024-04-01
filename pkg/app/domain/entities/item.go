@@ -3,13 +3,32 @@ package entities
 import "github.com/metrofico/integracion-menu-lib/pkg/app/domain/models"
 
 type Item struct {
-	Id           string `json:"id" bson:"id"`
-	ExternalData string `json:"external_data" bson:"external_data"`
-	Title        string `json:"title" bson:"title"`
-	Description  string `json:"description" bson:"description"`
-	PriceInfo           /*Herencia por composición*/
-	QuantityInfo        /*Herencia por composición*/
+	Id            string                   `json:"id" bson:"id"`
+	ExternalData  string                   `json:"external_data" bson:"external_data"`
+	Title         string                   `json:"title" bson:"title"`
+	Description   string                   `json:"description" bson:"description"`
+	Image         string                   `json:"image_url"`
+	PriceInfo                              /*Herencia por composición*/
+	QuantityInfo                           /*Herencia por composición*/
+	ModifierGroup map[string]ModifierGroup `json:"modifier_group"`
 }
+
+type (
+	ModifierGroup struct {
+		Id              string          `json:"id"`
+		ExternalData    string          `json:"external_data"`
+		Title           string          `json:"title"`
+		Subtitle        string          `json:"subtitle"`
+		QuentityInfo    QuantityInfo    `json:"quantity_info"`
+		ModifierOptions ModifierOptions `json:"modifier_options"`
+		DisplayType     string          `json:"display_type"`
+	}
+
+	ModifierOptions struct {
+		Id   string `json:"id"`
+		Type string `json:"type"`
+	}
+)
 
 type (
 	PriceInfo struct {
@@ -28,13 +47,13 @@ type (
 
 type (
 	QuantityInfo struct {
-		Quantity Quantity
+		Quantity Quantity `json:"quantity" bson:"volume_unit"`
 	}
 
 	Quantity struct {
-		MinPermitted           int64 `json:"min_permitted" bson:"min_permitted"`
-		MaxPermitted           int64 `json:"max_permitted" bson:"max_permitted"`
-		IsMinPermittedOptional bool  `json:"is_min_permitted_optional" bson:"is_min_permitted_optional"`
+		MinPermitted           int `json:"min_permitted" bson:"min_permitted"`
+		MaxPermitted           int `json:"max_permitted" bson:"max_permitted"`
+		IsMinPermittedOptional int `json:"is_min_permitted_optional" bson:"is_min_permitted_optional"`
 	}
 )
 
@@ -42,7 +61,27 @@ func NewItem() Item {
 	return Item{}
 }
 
-func (item *Item) Mapper(input models.Item) {
+func (item *Item) Mapper(input models.Item, mapModifiers map[string]models.ModifierGroup) {
+	modifierFinal := make(map[string]ModifierGroup)
+	for _, ids := range input.ModifierGrouopIds.Ids {
+		if modifier, ok3 := mapModifiers[ids]; ok3 {
+			modifierFinal[modifier.Id] = ModifierGroup{
+				Id:           modifier.Id,
+				ExternalData: modifier.ExternalData,
+				Title:        modifier.Title,
+				Subtitle:     modifier.Subtitle,
+				QuentityInfo: QuantityInfo{Quantity: Quantity{
+					MinPermitted: modifier.QuentityInfo.Quantity.MinPermitted,
+					MaxPermitted: modifier.QuentityInfo.Quantity.MaxPermitted,
+				}},
+				ModifierOptions: ModifierOptions{
+					Id:   modifier.ModifierOptions.Id,
+					Type: modifier.ModifierOptions.Type,
+				},
+				DisplayType: modifier.DisplayType,
+			}
+		}
+	}
 	price := PriceInfo{
 		Price:     int64(input.PriceInfo.Price * 100),
 		CorePrice: int64(input.PriceInfo.CorePrice * 100),
@@ -58,7 +97,7 @@ func (item *Item) Mapper(input models.Item) {
 		Quantity: Quantity{
 			MinPermitted:           input.QuantityInfo.Quantity.MinPermitted,
 			MaxPermitted:           input.QuantityInfo.Quantity.MaxPermitted,
-			IsMinPermittedOptional: input.QuantityInfo.Quantity.IsMinPermittedOptional == 1,
+			IsMinPermittedOptional: input.QuantityInfo.Quantity.IsMinPermittedOptional,
 		},
 	}
 
@@ -67,4 +106,5 @@ func (item *Item) Mapper(input models.Item) {
 	item.Description = input.Description
 	item.PriceInfo = price
 	item.QuantityInfo = quantity
+	item.ModifierGroup = modifierFinal
 }
