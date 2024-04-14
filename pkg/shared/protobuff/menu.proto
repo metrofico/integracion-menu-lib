@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package menu;
+option go_package = "shared/protobuff/menu";
+
+enum CommandMenu {
+  UpdateAll = 0;
+  UpdateRestaurants = 1;
+  UpdateChains = 2;
+}
+enum Entity {
+  Products = 0;
+  Menu = 1;
+}
+message Store {
+  uint32 id = 1;
+  string name = 2;
+  uint32 chainId = 3;
+  string chainName = 4;
+}
+message Metadata {
+  repeated Store stores = 1;
+}
+
+message SendMenu {
+  string id = 1 ;
+  string payload = 2;
+  CommandMenu command = 3;
+  Entity entity= 4;
+  Metadata metadata = 5;
+}
