@@ -6,6 +6,10 @@ option go_package = "pkg/shared/protobuff/core-menu";
 enum StreamsCoreMenu {
   SyncMenu = 0;
 }
-enum StreamsCoreMenuSubjects{
-  GetMenuLegacy = 0;
+enum StreamsCoreMenuEvents{
+  NewRequestAllSyncMenuEvent = 0;
+}
+
+message NewRequestAllSyncMenu{
+  string id = 1;
 }
