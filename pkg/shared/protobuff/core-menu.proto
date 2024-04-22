@@ -8,8 +8,12 @@ enum StreamsCoreMenu {
 }
 enum StreamsCoreMenuEvents{
   NewRequestAllSyncMenuEvent = 0;
+  PulledMenuLegacyEvent = 1;
 }
 
 message NewRequestAllSyncMenu{
+  string id = 1;
+}
+message PulledMenuLegacy {
   string id = 1;
 }
